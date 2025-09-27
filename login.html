@@ -10,65 +10,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body {
-      background: linear-gradient(rgba(0, 210, 255, 0.6), rgba(0, 100, 200, 0.6)), url('drop.jpg') no-repeat center center fixed;
+      background: linear-gradient(rgba(0, 210, 255, 0.6), rgba(0, 100, 200, 0.6)), 
+                  url('drop.jpg') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 20px; overflow: hidden;
     }
-
     .container {
-      display: flex;
-      flex-direction: row;
+      display: flex; flex-direction: row;
       background-color: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(10px);
-      border-radius: 20px;
-      overflow: hidden;
+      border-radius: 20px; overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      width: 600px;
-      max-width: 90%;
+      width: 600px; max-width: 90%;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      opacity: 0;
-      transform: scale(0.9);
+      opacity: 0; transform: scale(0.9);
       animation: container-pop-in 0.8s ease-out forwards;
     }
-
-    @keyframes container-pop-in {
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .slide-in-element {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: slide-in 0.8s ease forwards;
-    }
-
-    @keyframes slide-in {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    @keyframes container-pop-in { to { opacity: 1; transform: scale(1); } }
     .form-section { flex: 1; padding: 40px; }
-    .form-section h2 {
-      margin-bottom: 30px; font-size: 2.2rem; color: #333; font-weight: 600;
-    }
+    .form-section h2 { margin-bottom: 30px; font-size: 2.2rem; color: #333; font-weight: 600; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
     .form-group input {
       width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;
     }
     .form-group input:focus {
-      outline: none; border-color: #00d2ff; box-shadow: 0 0 8px rgba(0,210,255,0.4);
+      outline: none; border-color: #00d2ff; 
+      box-shadow: 0 0 8px rgba(0,210,255,0.4);
     }
     .buttons { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 30px; }
     .login-btn, .signup-btn {
@@ -77,7 +48,8 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .login-btn {
-      background-color: #00d2ff; color: white; box-shadow: 0 4px 15px rgba(0,210,255,0.2);
+      background-color: #00d2ff; color: white;
+      box-shadow: 0 4px 15px rgba(0,210,255,0.2);
     }
     .login-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,210,255,0.4); }
     .signup-btn { background-color: white; color: #00d2ff; border: 2px solid #00d2ff; }
@@ -95,16 +67,16 @@
 <body>
   <div class="container">
     <div class="form-section">
-      <h2 class="slide-in-element">Login</h2>
-      <div class="form-group slide-in-element">
+      <h2>Login</h2>
+      <div class="form-group">
         <label>Email Address</label>
-        <input type="email" id="loginEmail" placeholder="hello@reallygreatsite">
+        <input type="email" id="loginEmail" placeholder="hello@reallygreatsite.com">
       </div>
-      <div class="form-group slide-in-element">
+      <div class="form-group">
         <label>Password</label>
         <input type="password" id="loginPassword" placeholder="********">
       </div>
-      <div class="buttons slide-in-element">
+      <div class="buttons">
         <button class="login-btn" id="loginBtn">Login</button>
         <button class="signup-btn" onclick="location.href='signup.html'">Sign Up</button>
       </div>
@@ -117,7 +89,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    // Your Firebase config (same as signup)
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyBbPeczqOSEKmW3W8p-AiQvvbWz6o5qc98",
       authDomain: "suvidha-e1d61.firebaseapp.com",
@@ -139,7 +111,12 @@
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Login successful!");
-          window.location.href = "success.html"; // Redirect after login
+
+          // ✅ LocalStorage में login save
+          localStorage.setItem("loggedIn", "true");
+
+          // Redirect
+          window.location.href = "mentors.html";
         })
         .catch((error) => {
           alert("Error: " + error.message);
