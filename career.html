@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Paths - Suvidha | Right Guidance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ======================================= */
+        /* BASE STYLES & VARIABLES (Tota Theme Applied) */
+        /* ======================================= */
+        :root {
+            --color-tota-primary: #008080; 
+            --color-tota-secondary: #00AAAA;
+            --color-tota-light: #E0FFFF;
+            --color-background: #F0FDFA; 
+            
+            --color-white: #ffffff;
+            --color-text-dark: #1f2937;
+            --color-text-subtle: #4b5563;
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.12); 
+            
+            --path-engineering: #3b82f6;
+            --path-medical: #10b981;
+            --path-business: #a855f7;
+            --path-humanities: #f59e0b; /* New color for Class 10/Humanities */
+            --path-government: #6b7280;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: var(--color-background); 
+            color: var(--color-text-dark);
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ======================================= */
+        /* NAVBAR STYLES */
+        /* ======================================= */
+        nav {
+            background: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 24px;
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-tota-primary);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 500;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 5px;
+        }
+        nav ul li a:hover { 
+            color: var(--color-tota-secondary); 
+            border-bottom: 2px solid var(--color-tota-secondary);
+        }
+        .menu-icon { display: none; cursor: pointer; font-size: 28px; color: var(--color-tota-primary); }
+        
+        /* ======================================= */
+        /* PAGE HEADER STYLES */
+        /* ======================================= */
+        .page-header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--color-tota-light) 0%, #e0f8ff 100%); 
+            padding: 60px 20px 30px;
+            border-bottom: 5px solid var(--color-tota-primary);
+            border-radius: 0 0 25px 25px; 
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-tota-primary); 
+            margin-bottom: 5px;
+        }
+        .page-header p {
+            color: var(--color-text-subtle);
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+        
+        /* Control Buttons (Class Selection) */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .controls button {
+            background: var(--color-white);
+            border: 2px solid var(--color-tota-primary); /* Default button border */
+            color: var(--color-tota-primary);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        /* Active Button Style */
+        .controls button.active {
+            background: var(--color-tota-primary);
+            color: var(--color-white);
+            box-shadow: 0 4px 10px rgba(0, 128, 128, 0.3);
+        }
+        .controls button:hover:not(.active) {
+            background: var(--color-tota-light);
+            border-color: var(--color-tota-secondary);
+        }
+
+        /* ======================================= */
+        /* PATH SECTION STYLING (The Flowchart) */
+        /* ======================================= */
+        .path-section {
+            background: var(--color-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg); 
+            margin-bottom: 40px;
+            padding: 30px 25px;
+            border-left: 6px solid var(--color-tota-primary);
+            transition: border-color 0.3s;
+            /* Animation for sequential fade-in */
+            opacity: 1; /* Reset opacity */
+            transition: opacity 0.5s ease;
+        }
+        .path-section:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); 
+        }
+        
+        /* Dynamic Border Colors */
+        .engineering-path { border-left-color: var(--path-engineering); }
+        .medical-path { border-left-color: var(--path-medical); }
+        .business-path { border-left-color: var(--path-business); }
+        .government-path { border-left-color: var(--path-government); }
+        .class10-path { border-left-color: var(--path-humanities); } /* New path highlight */
+
+        .path-title {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--color-text-dark); 
+        }
+
+        /* View Details Button */
+        .view-details-btn {
+            background: var(--color-tota-secondary);
+            color: var(--color-white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+        .view-details-btn:hover {
+            background: var(--color-tota-primary);
+            transform: translateY(-1px);
+        }
+
+        /* --- FLOWCHART ANIMATION STYLES --- */
+        
+        @keyframes fadeInMove {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .path-flow {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            overflow-x: auto; 
+            padding-top: 30px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .flow-step {
+            min-width: 170px;
+            position: relative;
+            flex-shrink: 0;
+            
+            /* Apply initial hidden state and animation */
+            opacity: 0; 
+            animation: fadeInMove 0.5s ease-out forwards;
+        }
+        
+        /* Apply delays for sequential effect */
+        .path-flow .flow-step:nth-child(1) { animation-delay: 0.1s; }
+        .path-flow .flow-step:nth-child(2) { animation-delay: 0.3s; }
+        .path-flow .flow-step:nth-child(3) { animation-delay: 0.5s; }
+        .path-flow .flow-step:nth-child(4) { animation-delay: 0.7s; }
+        .path-flow .flow-step:nth-child(5) { animation-delay: 0.9s; }
+        
+        /* Arrow Connector */
+        .flow-step::before {
+            content: ''; left: calc(50% + 45px); top: 45px; width: 50px; height: 2px;
+            background-color: #d1d5db; z-index: 0;
+        }
+        .flow-step::after {
+            content: '>'; left: calc(50% + 90px); top: 36px; font-size: 20px;
+            color: #d1d5db; font-weight: 700; z-index: 0;
+        }
+        .path-flow .flow-step:last-child::before,
+        .path-flow .flow-step:last-child::after { content: ''; }
+        
+        /* Icon Box */
+        .icon-box {
+            width: 80px; height: 80px; border-radius: 50%; display: flex;
+            justify-content: center; align-items: center; margin-bottom: 10px;
+            font-size: 36px;
+            color: var(--color-white);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative; z-index: 1;
+        }
+
+        .step-title { font-size: 16px; font-weight: 600; color: var(--color-tota-primary); }
+        .step-details { font-size: 13.5px; color: var(--color-text-subtle); }
+        
+        /* ======================================= */
+        /* MOBILE OPTIMIZATION */
+        /* ======================================= */
+        @media (max-width: 768px) {
+            .nav-content ul { 
+                display: none; flex-direction: column; position: absolute; top: 60px;
+                left: 0; width: 100%; background: var(--color-white);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 10px 0;
+            }
+            .nav-content ul.active { display: flex; }
+            .nav-content ul li { text-align: center; width: 100%; }
+            .nav-content ul li a { display: block; padding: 10px 20px; }
+            .menu-icon { display: block; }
+            
+            .page-header h1 { font-size: 32px; }
+            .controls { flex-wrap: wrap; }
+            .path-header { flex-direction: column; align-items: flex-start; }
+            .path-stats { margin-bottom: 10px; }
+            .view-details-btn { margin-top: 10px; }
+            
+            .path-flow { gap: 15px; }
+            .flow-step { min-width: 130px; }
+            .icon-box { width: 60px; height: 60px; font-size: 26px; }
+            
+            .flow-step::before { left: calc(50% + 35px); width: 25px; top: 40px; }
+            .flow-step::after { left: calc(50% + 55px); font-size: 16px; top: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-links');
+            navMenu.classList.toggle('active');
+        }
+
+        // Section Toggle Logic
+        function toggleSections(sectionToShow) {
+            const class12Section = document.getElementById('section-class12');
+            const class10Section = document.getElementById('section-class10');
+            const btn12 = document.getElementById('btn-class12');
+            const btn10 = document.getElementById('btn-class10');
+
+            if (sectionToShow === 'class12') {
+                class12Section.style.display = 'block';
+                class10Section.style.display = 'none';
+                btn12.classList.add('active');
+                btn10.classList.remove('active');
+            } else if (sectionToShow === 'class10') {
+                class12Section.style.display = 'none';
+                class10Section.style.display = 'block';
+                btn12.classList.remove('active');
+                btn10.classList.add('active');
+            }
+        }
+        
+        // Ensure Class 12 section is shown by default on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if class12 section exists before trying to display it
+            const class12Section = document.getElementById('section-class12');
+            if (class12Section) {
+                 // Set initial state: Class 12 visible, Class 10 hidden
+                class12Section.style.display = 'block';
+                const class10Section = document.getElementById('section-class10');
+                if (class10Section) {
+                    class10Section.style.display = 'none';
+                }
+                document.getElementById('btn-class12').classList.add('active');
+            }
+        });
+    </script>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Suvidha</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mentors.html">Mentors</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </div>
+    </nav>
+  
+    <div class="container">
+        <header class="page-header">
+            <h1>Course-to-Career Path Mapping</h1>
+            <p>Explore different educational and career pathways to make informed decisions about your future.</p>
+            <div class="controls">
+                <button id="btn-class12" class="active" onclick="toggleSections('class12')">Class 12 Career Paths</button>
+                <button id="btn-class10" onclick="toggleSections('class10')">Class 10 Stream Selection</button>
+            </div>
+        </header>
+        
+        <div id="section-class12">
+            <section class="path-section engineering-path">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Engineering Path</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: #e0f2ff; color: var(--path-engineering);">Science (PCM)</span>
+                            <span>• Most Popular</span>
+                            <span>• Difficulty: High</span>
+                            <span>• Duration: 4-6 years</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box">📚</div>
+                        <div class="step-title">Class 12</div>
+                        <div class="step-details">Physics, Chemistry, Mathematics</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box">🔍</div>
+                        <div class="step-title">Entrance Exam</div>
+                        <div class="step-details">JEE Main/Advanced, BITSAT, etc.</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">🎓</div>
+                        <div class="step-title">B.Tech/B.E.</div>
+                        <div class="step-details">Computer Science, Mechanical, Civil</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">🏢</div>
+                        <div class="step-title">Career Options</div>
+                        <div class="step-details">Software Engineer, Data Scientist, Core Roles</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-section medical-path">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Medical Path</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: var(--color-tota-light); color: var(--path-medical);">Science (PCB)</span>
+                            <span>• High Demand</span>
+                            <span>• Difficulty: Very High</span>
+                            <span>• Duration: 5-8 years</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box">📖</div>
+                        <div class="step-title">Class 12</div>
+                        <div class="step-details">Physics, Chemistry, Biology</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box">🔬</div>
+                        <div class="step-title">NEET Exam</div>
+                        <div class="step-details">National Eligibility Entrance Test</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">⚕️</div>
+                        <div class="step-title">MBBS/BDS</div>
+                        <div class="step-details">Medical/Dental Degree</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">🏥</div>
+                        <div class="step-title">Practice/Specialization</div>
+                        <div class="step-details">Doctor, Surgeon, Specialist, Research</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-section business-path">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Business/Finance Path</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: #f3e8ff; color: var(--path-business);">Commerce</span>
+                            <span>• Growing</span>
+                            <span>• Difficulty: Medium</span>
+                            <span>• Duration: 3-5 years</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box">💸</div>
+                        <div class="step-title">Class 12</div>
+                        <div class="step-details">Accountancy, Economics, Business Studies</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box">💼</div>
+                        <div class="step-title">Entrance Exam</div>
+                        <div class="step-details">CUET, CAT/CLAT (for Law)</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">🏛️</div>
+                        <div class="step-title">BBA/B.Com/CA</div>
+                        <div class="step-details">Business Administration, Finance, Accounting</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">📈</div>
+                        <div class="step-title">Career Options</div>
+                        <div class="step-details">Manager, Accountant, Analyst, Entrepreneur</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="path-section government-path">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Government Services</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: #e5e7eb; color: var(--path-government);">Any Stream</span>
+                            <span>• Stable Choice</span>
+                            <span>• Difficulty: High</span>
+                            <span>• Duration: 2-4 years</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box">📜</div>
+                        <div class="step-title">Class 12</div>
+                        <div class="step-details">Any stream with strong basics</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box">🏛️</div>
+                        <div class="step-title">Graduation</div>
+                        <div class="step-details">Any degree is eligible (BA, BSc, BCom)</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">📝</div>
+                        <div class="step-title">UPSC/SSC/IBPS</div>
+                        <div class="step-details">Civil Services, Bank PO, Railways, etc.</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box">🇮🇳</div>
+                        <div class="step-title">Government Job</div>
+                        <div class="step-details">IAS, IPS, Bank PO/Clerk, State Services</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+<div id="section-class10" style="display: none;">
+            
+            <section class="path-section class10-path" style="border-left-color: var(--path-engineering);">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Science Stream Options</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: #e0f2ff; color: var(--path-engineering);">High Potential</span>
+                            <span>• Subjects: PCM or PCB</span>
+                            <span>• Next Step: Engineering or Medical</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-engineering);">🧪</div>
+                        <div class="step-title">Choose PCM</div>
+                        <div class="step-details">Focus on Math, Physics, Chemistry</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-medical);">🧬</div>
+                        <div class="step-title">Choose PCB</div>
+                        <div class="step-details">Focus on Biology, Physics, Chemistry</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-engineering);">💻</div>
+                        <div class="step-title">Add Computer Science</div>
+                        <div class="step-details">Good for Engineering (Coding)</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-medical);">⚕️</div>
+                        <div class="step-title">Allied Science Courses</div>
+                        <div class="step-details">Nursing, Pharmacy (PCB/PCM required)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-section class10-path" style="border-left-color: var(--path-business);">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Commerce Stream Options</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: #f3e8ff; color: var(--path-business);">Growing Demand</span>
+                            <span>• Core: Accounts, Economics</span>
+                            <span>• Next Step: CA, BBA, Finance</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-business);">📊</div>
+                        <div class="step-title">Core Subjects</div>
+                        <div class="step-details">Accountancy, Economics, Business Studies</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-business);">🏛️</div>
+                        <div class="step-title">With Math</div>
+                        <div class="step-details">Opens gates for Economics Hons & MBA</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-business);">✍️</div>
+                        <div class="step-title">Without Math</div>
+                        <div class="step-details">Focus on theoretical Commerce/B.Com</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-business);">💻</div>
+                        <div class="step-title">Add IT/IP</div>
+                        <div class="step-details">Useful for FinTech and Data Analysis</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-section class10-path" style="border-left-color: var(--path-humanities);">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Humanities Stream Options</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: #fff8e1; color: var(--path-humanities);">Creative & Civil Services</span>
+                            <span>• Core: History, Political Science</span>
+                            <span>• Next Step: UPSC, Law, Design</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-humanities);">📜</div>
+                        <div class="step-title">Core Subjects</div>
+                        <div class="step-details">History, Geography, Political Science</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-humanities);">⚖️</div>
+                        <div class="step-title">Add Legal Studies</div>
+                        <div class="step-details">Prepares for CLAT/Law entrance exams</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-humanities);">🎨</div>
+                        <div class="step-title">Add Fine Arts/Psychology</div>
+                        <div class="step-details">Good for Design, Counseling, Media</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--path-humanities);">💰</div>
+                        <div class="step-title">Add Economics</div>
+                        <div class="step-details">Useful for policy and financial careers</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="path-section class10-path" style="border-left-color: var(--color-tota-primary);">
+                <div class="path-header">
+                    <div>
+                        <h2 class="path-title">Future Skills & Vocational Path</h2>
+                        <div class="path-stats">
+                            <span class="status-tag" style="background: var(--color-tota-light); color: var(--color-tota-primary);">Skill Focused</span>
+                            <span>• Goal: Early Employment</span>
+                            <span>• Next Step: Polytechnic/ITI/Job</span>
+                        </div>
+                    </div>
+                    <button class="view-details-btn">View Details →</button>
+                </div>
+
+                <div class="path-flow">
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--color-tota-primary);">🧭</div>
+                        <div class="step-title">Aptitude Testing</div>
+                        <div class="step-details">Understand strengths beyond traditional academics</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--color-tota-secondary);">🛠️</div>
+                        <div class="step-title">Polytechnic / ITI</div>
+                        <div class="step-details">Diploma in Engineering/Trades (3/2 years)</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--color-tota-primary);">💻</div>
+                        <div class="step-title">Digital Marketing</div>
+                        <div class="step-details">Short-term courses for immediate skills</div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="icon-box" style="background: var(--color-tota-secondary);">🎨</div>
+                        <div class="step-title">Graphic Design</div>
+                        <div class="step-details">Creative job opportunities after certificate</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+    </div>
+</body>
+</html>
+</body>
+</html>
