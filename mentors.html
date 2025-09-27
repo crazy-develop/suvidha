@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expert Mentors - Connect & Grow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #047857;
+      --color-secondary: #0891b2;
+      --color-accent: #f59e0b;
+      --color-primary-light: #d1fae5;
+      --color-secondary-light: #e0f2fe;
+      --color-background: #f7fafc;
+      --color-section-light: #edfefe;
+      --color-white: #ffffff;
+      --color-text-dark: #1f2937;
+      --color-text-subtle: #6b7280;
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.09);
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: var(--color-background);
+      color: var(--color-text-dark);
+    }
+    /* NAVBAR */
+    nav {
+      background: var(--color-white);
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0;
+    }
+    .nav-content {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 1px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: var(--color-text-dark);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover { color: var(--color-primary); }
+
+    /* HERO HEADER */
+    .hero {
+      background: linear-gradient(115deg, var(--color-primary-light) 50%, var(--color-secondary-light) 100%);
+      padding: 60px 24px 40px 24px;
+      text-align: center;
+      border-radius: 0 0 36px 36px;
+      box-shadow: 0 12px 38px rgba(4, 120, 87, 0.09);
+    }
+    .hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      color: var(--color-text-subtle);
+      font-size: 20px;
+      margin-bottom: 22px;
+    }
+    .hero .cta-btn {
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 14px 34px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 12px rgba(4, 120, 87, 0.12);
+      margin-top: 16px;
+      transition: background .3s;
+    }
+    .hero .cta-btn:hover { background: #065f46; }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 42px 0 32px 0;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: var(--color-section-light);
+      border-radius: 14px;
+      box-shadow: var(--shadow-md);
+      padding: 22px 40px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .stat p:first-child {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--color-secondary);
+      letter-spacing: 2px;
+      margin: 0 0 10px;
+    }
+    .stat p:last-child {
+      font-size: 15px;
+      color: var(--color-text-subtle);
+      margin: 0;
+    }
+
+    /* SEARCH & FILTER PANEL */
+    .search-panel {
+      background: var(--color-section-light);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      padding: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 40px;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-panel input, .search-panel select {
+      font-size: 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px 15px;
+      min-width: 210px;
+      color: var(--color-text-dark);
+      transition: border-color 0.3s;
+    }
+    .search-panel input:focus, .search-panel select:focus {
+      border-color: var(--color-primary);
+      outline: none;
+      box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+    .search-panel button {
+      padding: 12px 22px;
+      background: var(--color-primary);
+      color: var(--color-white);
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    .search-panel button:hover { background: #065f46; }
+
+    /* MENTORS GRID */
+    .mentors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px;
+      margin-bottom: 56px;
+    }
+    .card {
+      background: var(--color-white);
+      padding: 28px 20px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      border-bottom: 6px solid var(--color-primary);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 18px 32px rgba(4,120,87,0.11);
+    }
+    .card img {
+      width: 98px;
+      height: 98px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 18px;
+      border: 4px solid var(--color-primary);
+    }
+    .card h2 { font-size: 21px; font-weight: 700; margin-bottom: 2px; }
+    .job-title { font-size: 15.5px; font-weight: 600; color: var(--color-secondary); margin-bottom: 2px;}
+    .detail { font-size: 13.5px; color: var(--color-text-subtle); margin: 2px 0; }
+    .rating { font-size: 15.5px; color: var(--color-accent); font-weight: 600; margin-top: 6px;}
+    .price { font-size: 18px; font-weight: 700; color: var(--color-primary); margin: 12px 0 1px 0; }
+    .availability { color: #10b981; font-weight: 600; margin-top: 7px;}
+    .badges { margin-bottom: 10px;}
+    .badges span {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      margin-right: 6px;
+      margin-bottom: 3px;
+    }
+    .badges .verified { background: var(--color-primary-light); color: var(--color-primary);}
+    .badges .top-mentor { background: #fef3c7; color: #d97706;}
+    .expertise {
+      margin: 12px 0 10px 0;
+      min-height: 36px;
+    }
+    .expertise span {
+      display: inline-block;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 18px;
+      margin: 4px 6px 2px 0;
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+    }
+    .actions button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+    .message { background: #e5e7eb; color: var(--color-text-dark);}
+    .message:hover { background: #d1d5db;}
+    .book { background: var(--color-primary); color: var(--color-white);}
+    .book:hover { background: #065f46;}
+
+    /* TESTIMONIALS */
+    .testimonials {
+      max-width: 950px;
+      margin: 56px auto 60px auto;
+      padding: 48px 20px 26px 20px;
+      background: linear-gradient(93deg, var(--color-primary-light) 60%, var(--color-section-light) 100%);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+    }
+    .testimonials h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: var(--color-primary);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .testimonial {
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      font-size: 16.5px;
+      font-style: italic;
+      color: var(--color-text-subtle);
+      background: var(--color-white);
+      padding: 18px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(4,120,87,0.08);
+    }
+    .testimonial strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--color-text-dark);
+      font-style: normal;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(93deg, var(--color-primary-light) 60%, var(--color-section-light) 100%);
+      text-align: center;
+      padding: 54px 22px 48px 22px;
+      border-radius: 16px;
+      max-width: 900px;
+      margin: 0 auto 60px auto;
+      box-shadow: var(--shadow-md);
+    }
+    .cta h2 { font-size: 29px; margin-bottom: 18px;color: var(--color-primary);}
+    .cta button {
+      padding: 16px 40px;
+      background: var(--color-primary);
+      color: var(--color-white);
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .cta button:hover { background: #065f46;}
+
+    /* FOOTER */
+    footer {
+      background: var(--color-text-dark);
+      color: var(--color-white);
+      padding: 40px 20px 18px 20px;
+      text-align: center;
+      border-radius: 36px 36px 0 0;
+    }
+    footer a {
+      color: var(--color-primary-light);
+      text-decoration: none;
+      margin: 0 14px;
+      transition: color 0.3s;
+    }
+    footer a:hover { color: var(--color-secondary); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-content">
+      <div class="logo">Suvidha</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mentors.html">Mentors</a></li>
+        <li><a href="career.html">career</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO HEADER -->
+  <section class="hero">
+    <h1>Connect. Learn. Grow.</h1>
+    <p>Discover top mentors from leading colleges & companies. Personalized career guidance for every aspiration.</p>
+    <button class="cta-btn">Get Started</button>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><p>12+</p><p>Expert Mentors</p></div>
+    <div class="stat"><p>4.8</p><p>Average Rating</p></div>
+    <div class="stat"><p>1,500+</p><p>Sessions Completed</p></div>
+    <div class="stat"><p>98%</p><p>Success Rate</p></div>
+  </div>
+
+  <!-- SEARCH & FILTER PANEL -->
+  <div class="search-panel">
+    <input type="text" placeholder="Search mentors by name, company, or expertise..." />
+    <select>
+      <option>Select Expertise</option>
+      <option>Engineering</option>
+      <option>Medical</option>
+      <option>Chartered Accountant</option>
+      <option>Data Science & AI</option>
+      <option>UPSC / IAS</option>
+      <option>Law</option>
+    </select>
+    <select>
+      <option>Sort by Price</option>
+      <option>Lowest First</option>
+      <option>Highest First</option>
+    </select>
+    <button>Search</button>
+  </div>
+
+  <!-- MENTORS SECTION -->
+  <div class="mentors">
+    <!-- Mentor 1 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=AS" alt="Arjun Sharma" />
+      <div class="badges">
+        <span class="verified">Verified</span>
+        <span class="top-mentor">🌟 Top Mentor</span>
+      </div>
+      <h2>Arjun Sharma</h2>
+      <p class="job-title">Senior Software Engineer</p>
+      <p class="detail">Google | IIT Delhi</p>
+      <p class="rating">⭐ 4.9 (287 sessions)</p>
+      <p class="price">₹500/hour</p>
+      <div class="expertise"><span>System Design</span><span>DSA</span><span>Career Prep</span></div>
+      <p class="availability">Slots: 12</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 2 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=PV" alt="Dr. Priya Verma" />
+      <div class="badges"><span class="verified">Verified</span><span class="top-mentor">🌟 Top Mentor</span></div>
+      <h2>Dr. Priya Verma</h2>
+      <p class="job-title">Resident Doctor</p>
+      <p class="detail">AIIMS Delhi | 4+ yrs exp</p>
+      <p class="rating">⭐ 4.8 (156 sessions)</p>
+      <p class="price">₹600/hour</p>
+      <div class="expertise"><span>NEET Prep</span><span>Medical Career</span></div>
+      <p class="availability">Slots: 8</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 3 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=RS" alt="Rohit Singh" />
+      <div class="badges"><span class="verified">Verified</span></div>
+      <h2>Rohit Singh</h2>
+      <p class="job-title">Chartered Accountant</p>
+      <p class="detail">Deloitte | DU | 6+ yrs</p>
+      <p class="rating">⭐ 4.7 (203 sessions)</p>
+      <p class="price">₹400/hour</p>
+      <div class="expertise"><span>CA Prep</span><span>Finance</span></div>
+      <p class="availability">Slots: 15</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 4 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=AK" alt="Ananya Kapoor" />
+      <div class="badges"><span class="verified">Verified</span></div>
+      <h2>Ananya Kapoor</h2>
+      <p class="job-title">Data Scientist</p>
+      <p class="detail">Microsoft | BITS Pilani</p>
+      <p class="rating">⭐ 4.9 (189 sessions)</p>
+      <p class="price">₹550/hour</p>
+      <div class="expertise"><span>Machine Learning</span><span>AI</span><span>Python</span></div>
+      <p class="availability">Slots: 9</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 5 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=RV" alt="Rajat Verma" />
+      <div class="badges"><span class="verified">Verified</span><span class="top-mentor">🌟 Top Mentor</span></div>
+      <h2>Rajat Verma</h2>
+      <p class="job-title">IAS Officer</p>
+      <p class="detail">UPSC Topper (AIR 23)</p>
+      <p class="rating">⭐ 4.9 (120 sessions)</p>
+      <p class="price">₹700/hour</p>
+      <div class="expertise"><span>UPSC</span><span>Ethics</span><span>Essay Writing</span></div>
+      <p class="availability">Slots: 5</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 6 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=SM" alt="Sneha Mehta" />
+      <div class="badges"><span class="verified">Verified</span></div>
+      <h2>Sneha Mehta</h2>
+      <p class="job-title">Corporate Lawyer</p>
+      <p class="detail">Supreme Court | NLU Delhi</p>
+      <p class="rating">⭐ 4.6 (98 sessions)</p>
+      <p class="price">₹450/hour</p>
+      <div class="expertise"><span>Law Career</span><span>CLAT Prep</span></div>
+      <p class="availability">Slots: 10</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 7 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=MP" alt="Mohit Patel" />
+      <div class="badges"><span class="verified">Verified</span><span class="top-mentor">🌟 Top Mentor</span></div>
+      <h2>Mohit Patel</h2>
+      <p class="job-title">MBA Coach</p>
+      <p class="detail">IIM Ahmedabad | 5+ yrs exp</p>
+      <p class="rating">⭐ 4.8 (116 sessions)</p>
+      <p class="price">₹650/hour</p>
+      <div class="expertise"><span>MBA Prep</span><span>GD & Interview</span></div>
+      <p class="availability">Slots: 7</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 8 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=DS" alt="Deepika Soni" />
+      <div class="badges"><span class="verified">Verified</span></div>
+      <h2>Deepika Soni</h2>
+      <p class="job-title">Design Lead</p>
+      <p class="detail">Adobe | NID Ahmedabad</p>
+      <p class="rating">⭐ 4.7 (83 sessions)</p>
+      <p class="price">₹470/hour</p>
+      <div class="expertise"><span>UX/UI Design</span><span>Portfolio Review</span></div>
+      <p class="availability">Slots: 8</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 9 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=RG" alt="Rishi Gupta" />
+      <div class="badges"><span class="verified">Verified</span></div>
+      <h2>Rishi Gupta</h2>
+      <p class="job-title">Startup Founder</p>
+      <p class="detail">Ex-Flipkart | IIT Bombay</p>
+      <p class="rating">⭐ 4.8 (140 sessions)</p>
+      <p class="price">₹600/hour</p>
+      <div class="expertise"><span>Entrepreneurship</span><span>Fundraising</span></div>
+      <p class="availability">Slots: 6</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+    <!-- Mentor 10 -->
+    <div class="card">
+      <img src="https://via.placeholder.com/100/047857/ffffff?text=KM" alt="Karan Malhotra" />
+      <div class="badges"><span class="verified">Verified</span></div>
+      <h2>Karan Malhotra</h2>
+      <p class="job-title">Product Manager</p>
+      <p class="detail">Amazon | ISB Hyderabad</p>
+      <p class="rating">⭐ 4.7 (75 sessions)</p>
+      <p class="price">₹500/hour</p>
+      <div class="expertise"><span>Product Management</span><span>Case Prep</span></div>
+      <p class="availability">Slots: 9</p>
+      <div class="actions"><button class="message">Message</button><button class="book">Book</button></div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial">
+      "I got my dream job thanks to Expert Mentorship Hub. The mentors are super experienced and very friendly!" <strong>- Riya, Student</strong>
+    </div>
+    <div class="testimonial">
+      "Personalized guidance from industry leaders gave me complete clarity for my future." <strong>- Ankit, MBA Aspirant</strong>
+    </div>
+    <div class="testimonial">
+      "Mentors helped me crack the UPSC interview and build my confidence. Highly recommended." <strong>- Mayank, UPSC Candidate</strong>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta">
+    <h2>Ready to transform your career?</h2>
+    <button>Join Now</button>
+  </section>
+
+  
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Expert Mentorship Hub. All Rights Reserved.</p>
+    <div>
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms</a> |
+      <a href="#">Contact Us</a>
+    </div>
+  </footer>
+</body>
+</html>
