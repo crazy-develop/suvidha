@@ -1,84 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up Page</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Role Selection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(rgba(0, 210, 255, 0.6), rgba(0, 100, 200, 0.6)), url('drop.jpg') no-repeat center center fixed;
-      background-size: cover;
       display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 20px;
+      height: 100vh; background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+      padding: 20px;
     }
-    .container { background: #fff; padding: 30px; border-radius: 15px; width: 400px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
-    .form-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; font-weight: 500; }
-    input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; }
-    button { margin-top: 15px; width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; }
-    .signup-btn { background: #00d2ff; color: white; }
-    .login-btn { background: white; border: 2px solid #00d2ff; color: #00d2ff; }
+    .role-container {
+      background: white; padding: 40px 30px;
+      border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center; width: 100%; max-width: 400px;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    h2 { margin-bottom: 25px; font-size: 1.8rem; color: #333; }
+    .role-btn {
+      display: block; width: 100%; margin: 12px 0;
+      padding: 14px; border-radius: 30px; border: none;
+      background: #00d2ff; color: white; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .role-btn:hover { background: #0099cc; transform: translateY(-3px); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Sign Up</h2>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="email" placeholder="hello@reallygreatsite.com">
-    </div>
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" id="fullname" placeholder="Dushyant Saini">
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="password" placeholder="********">
-    </div>
-    <button class="signup-btn" id="signup">Sign Up</button>
-    <button class="login-btn" onclick="location.href='login.html'">Login</button>
-    <p id="message" style="color:red; margin-top:10px;"></p>
+
+  <div class="role-container">
+    <h2>Sign Up As</h2>
+    <button class="role-btn" onclick="chooseRole('ngo')">NGO</button>
+    <button class="role-btn" onclick="chooseRole('government')">Government</button>
+    <button class="role-btn" onclick="chooseRole('student')">Student</button>
+    
   </div>
 
-  <!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+  <script>
+    function chooseRole(role) {
+      // Role save in localStorage (optional)
+      localStorage.setItem("signupRole", role);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBbPeczqOSEKmW3W8p-AiQvvbWz6o5qc98",
-    authDomain: "suvidha-e1d61.firebaseapp.com",
-    projectId: "suvidha-e1d61",
-    storageBucket: "suvidha-e1d61.appspot.com",
-    messagingSenderId: "179187721856",
-    appId: "1:179187721856:web:cf6d935367c5ff889b6865",
-    measurementId: "G-84VH1KY9S3"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // Signup function
-  document.querySelector(".signup-btn").addEventListener("click", async () => {
-    const email = document.querySelector('input[type="email"]').value;
-    const password = document.querySelector('input[type="password"]').value;
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created:", userCredential.user);
-
-      // ✅ Success → Redirect
-      window.location.href = "success.html";
-
-    } catch (error) {
-      console.error("Error:", error.message);
-      alert(error.message); // show error to user
+      // Redirect based on role
+      if (role === "ngo") {
+        window.location.href = "ngosignup.html";
+      } else if (role === "government") {
+        window.location.href = "govermentsignup.html";
+      } else if (role === "student") {
+        window.location.href = "studentsignup.html";
+      } else if (role === "college") {
+        window.location.href = "college-signup.html";
+      }
     }
-  });
-</script>
+  </script>
 
+</body>
 </html>
